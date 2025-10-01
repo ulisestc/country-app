@@ -1,13 +1,14 @@
 import { Component, Input } from '@angular/core';
 // import { RESTCountry } from '../../interfaces/rest-countries.interface';
-import { NgFor } from '@angular/common';
+import { DecimalPipe, NgFor } from '@angular/common';
 import { Country } from '../../interfaces/country.interface';
 
 @Component({
   selector: 'country-list',
   standalone: true,
   imports: [
-    NgFor
+    NgFor,
+    DecimalPipe,
   ],
   templateUrl: './country-list.component.html',
 })
