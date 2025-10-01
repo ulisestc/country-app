@@ -12,9 +12,27 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-
-      </tr>
+          <tr *ngFor="
+              let country of countries;
+              let index = index;
+              trackBy: trackByCountryCode
+          ">
+            <td>{{index + 1}}</td>
+            <td>{{country.flag}}</td>
+            <td>
+              <img
+                src="{{country.flagSvg}}"
+                alt="{{country.name}}"
+                class="w-10"
+              />
+            </td>
+            <td>{{country.name}}</td>
+            <td>{{country.capital}}</td>
+            <td>{{country.population}}</td>
+            <td>
+              <a class = "link-primary cursor-pointer">Más información</a>
+            </td>
+          </tr>
     </tbody>
   </table>
 </section>
