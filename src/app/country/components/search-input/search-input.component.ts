@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, signal, effect } from '@angular/core';
+import { Component, Input, Output, EventEmitter, signal, effect, OnInit } from '@angular/core';
 
 @Component({
   selector: 'country-search-input',
@@ -6,8 +6,9 @@ import { Component, Input, Output, EventEmitter, signal, effect } from '@angular
   imports: [],
   templateUrl: './search-input.component.html',
 })
-export class SearchInputComponent {
+export class SearchInputComponent implements OnInit {
   @Input() placeholder: string = 'buscar';
+  @Input() initialValue: string = '';
   @Output() value = new EventEmitter<string>();
 
   inputValue = signal<string>('');
@@ -21,4 +22,8 @@ export class SearchInputComponent {
 
     onCleanup(() => clearTimeout(timeout));
   })
+
+  ngOnInit(): void {
+    this.inputValue.set(this.initialValue);
+  }
 }
