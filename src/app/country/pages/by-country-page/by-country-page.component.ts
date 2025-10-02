@@ -12,18 +12,23 @@ import { Country } from '../../interfaces/country.interface';
   imports: [SearchInputComponent, CountryListComponent, NgIf],
   templateUrl: './by-country-page.component.html',
 })
-export class ByCountryPageComponent { 
+export class ByCountryPageComponent {
   CountryService = inject(CountryService);
-  
+
     isLoading = signal (false);
     isError = signal<string | null>(null);
     countries = signal<Country[]>([]);
-  
+
     onSearch( query: string){
+      if(query.trim() === ''){
+      this.countries.set([]);
+      // this.isError.set('No se puede buscar un país con un valor vacío');
+      return;
+    }
       if (this.isLoading()) return;
       this.isLoading.set(true);
       this.isError.set(null);
-  
+
       console.log({query});
       this.CountryService.searchByCountry( query ).subscribe({
         next: (countries) => {
@@ -36,6 +41,6 @@ export class ByCountryPageComponent {
           this.countries.set([]);
           this.isError.set(err);
         }
-      }) 
+      })
     }
 }

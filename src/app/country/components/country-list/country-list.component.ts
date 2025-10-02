@@ -19,7 +19,7 @@ export class CountryListComponent {
   @Input({ required: true }) countries!: Country[];
   @Input() isLoading: boolean = false;
   // @Input() isEmpty: boolean = false;
-  
+
   trackByCountryCode(index: number, country: Country): string {
     return country.cca2;
   }
