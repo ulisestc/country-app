@@ -12,6 +12,15 @@
       </tr>
     </thead>
     <tbody>
+      <tr *ngIf="isLoading; else results">
+        <td colspan="7" class="text-center mt-4">
+            <span class="flex items-center justify-center gap-2">
+            <span class="loading loading-spinner loading-lg text-primary"></span>
+            <span class="text-primary text-lg font-semibold">Cargando</span>
+            </span>
+        </td>
+      </tr>
+      <ng-template #results>
           <tr *ngFor="
               let country of countries;
               let index = index;
@@ -34,9 +43,14 @@
               </span>
             </td>
             <td>
-              <a class = "link-primary cursor-pointer">Más información</a>
+              <a
+                [routerLink]="['/country/by', country.cca2]" 
+                class = "link-primary cursor-pointer"
+                >Más información
+              </a>
             </td>
           </tr>
+      </ng-template>   
     </tbody>
   </table>
 </section>
