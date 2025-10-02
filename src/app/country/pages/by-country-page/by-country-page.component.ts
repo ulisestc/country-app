@@ -5,7 +5,7 @@ import { CountryListComponent } from '../../components/country-list/country-list
 import { NgIf } from '@angular/common';
 import { CountryService } from '../../services/country.service';
 import { Country } from '../../interfaces/country.interface';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-by-country-page',
@@ -18,6 +18,8 @@ export class ByCountryPageComponent {
 
   activatedRoute = inject(ActivatedRoute);
   queryParam = this.activatedRoute.snapshot.queryParamMap.get('query') ?? '';
+
+  router = inject(Router);
 
   ngOnInit(): void {
     if (this.queryParam) {
@@ -44,12 +46,14 @@ export class ByCountryPageComponent {
         next: (countries) => {
             this.isLoading.set(false);
             this.countries.set(countries);
+            this.router.navigate(['/country/by-capital?'], { queryParams: { query } });
         },
         error: (err) => {
           console.log(err);
           this.isLoading.set(false);
           this.countries.set([]);
           this.isError.set(err);
+          this.router.navigate(['/country/by-capital?'], { queryParams: { query } });
         }
       })
     }
