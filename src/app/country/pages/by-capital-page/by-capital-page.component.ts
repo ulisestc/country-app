@@ -48,14 +48,14 @@ export class ByCapitalPageComponent {
         next: (countries) => {
             this.isLoading.set(false);
             this.countries.set(countries);
-            this.router.navigate(['/country/by-capital?'], { queryParams: { query } });
+            this.router.navigate(['/country/by-capital'], { queryParams: { query } });
         },
         error: (err) => {
           console.log(err);
           this.isLoading.set(false);
           this.countries.set([]);
           this.isError.set(err);
-          this.router.navigate(['/country/by-capital?'], { queryParams: { query } });
+          this.router.navigate(['/country/by-capital'], { queryParams: { query } });
         }
       })
     // }
