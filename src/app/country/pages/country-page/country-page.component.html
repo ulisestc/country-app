@@ -1,1 +1,11 @@
-<p>country-page works!</p>,
+<div *ngIf="isError()" >
+  <app-not-found></app-not-found>
+</div>
+
+<div *ngIf="isLoading()" >
+  <h1 class="text-3xl">Cargando...</h1>
+</div>
+
+<div *ngIf="country" >
+  <country-information-page [country]="country"></country-information-page>
+</div>
